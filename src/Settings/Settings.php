@@ -13,6 +13,7 @@ use Dwnload\WpSettingsApi\SettingsApiFactory;
 use Dwnload\WpSettingsApi\WpSettingsApi;
 use TheFrosty\WpUtilities\Plugin\AbstractHookProvider;
 use TheFrosty\WpUtilities\Plugin\Plugin;
+use function filter_var;
 use function get_plugin_data;
 use function sanitize_text_field;
 
@@ -25,6 +26,7 @@ class Settings extends AbstractHookProvider
 
     public const SECTION = 'unghoster';
     public const FIELD_ACCOUNT_ID = 'account_id';
+    public const FIELD_ENABLED = 'enabled';
     public const FIELD_ENABLE_FOR_USER = 'enable_for_user';
     private const PREFIX = 'unghoster_';
 
@@ -52,7 +54,10 @@ class Settings extends AbstractHookProvider
      */
     public static function isEnabled(): bool
     {
-        return !empty(self::getAccountId());
+        return filter_var(
+            Options::getOption(self::FIELD_ENABLED, self::SECTION, false),
+            FILTER_VALIDATE_BOOL
+        );
     }
 
     /**
@@ -104,6 +109,17 @@ class Settings extends AbstractHookProvider
             new SettingSection([
                 SettingSection::SECTION_ID => self::SECTION, // Unique section ID
                 SettingSection::SECTION_TITLE => 'Unghoster Settings',
+            ])
+        );
+
+        $field_manager->addField(
+            new SettingField([
+                SettingField::NAME => self::FIELD_ENABLED,
+                SettingField::LABEL => esc_html__('Enable', 'wp-unghoster'),
+                SettingField::DESC => esc_html__('Enable of disable.', 'wp-unghoster'),
+                SettingField::TYPE => FieldTypes::FIELD_TYPE_CHECKBOX,
+                SettingField::DEFAULT => 'off',
+                SettingField::SECTION_ID => $section_id,
             ])
         );
 
