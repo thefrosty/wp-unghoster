@@ -113,6 +113,9 @@ class Settings extends AbstractHookProvider
                 SettingField::LABEL => \esc_html__('Unghoster ID', 'wp-unghoster'),
                 SettingField::DESC => \esc_html__('Your domain account ID.', 'wp-unghoster'),
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_TEXT,
+                SettingField::ATTRIBUTES => [
+                    'autocomplete' => 'off',
+                ],
                 SettingField::SECTION_ID => $section_id,
             ])
         );
@@ -120,10 +123,10 @@ class Settings extends AbstractHookProvider
         $field_manager->addField(
             new SettingField([
                 SettingField::NAME => self::FIELD_ENABLE_FOR_USER,
-                SettingField::LABEL => \esc_html__('Enable for users?', 'wp-unghoster'),
-                SettingField::DESC => \esc_html__('Your domain account ID.', 'wp-unghoster'),
+                SettingField::LABEL => \esc_html__('Enable for users', 'wp-unghoster'),
+                SettingField::DESC => \esc_html__('Enqueue the script for logged-in users?.', 'wp-unghoster'),
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_CHECKBOX,
-                SettingField::DEFAULT => 'on',
+                SettingField::DEFAULT => 'off',
                 SettingField::SECTION_ID => $section_id,
             ])
         );
