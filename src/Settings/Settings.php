@@ -16,6 +16,7 @@ use TheFrosty\WpUtilities\Plugin\Plugin;
 use function filter_var;
 use function get_plugin_data;
 use function sanitize_text_field;
+use const FILTER_VALIDATE_BOOL;
 
 /**
  * Class Settings
@@ -49,6 +50,15 @@ class Settings extends AbstractHookProvider
     }
 
     /**
+     * Returns the account id field.
+     * @return string
+     */
+    public static function getAccountId(): string
+    {
+        return sanitize_text_field(Options::getOption(self::FIELD_ACCOUNT_ID, self::SECTION));
+    }
+
+    /**
      * Returns the enabled setting.
      * @return bool
      */
@@ -61,21 +71,15 @@ class Settings extends AbstractHookProvider
     }
 
     /**
-     * Returns the account id field.
-     * @return string
-     */
-    public static function getAccountId(): string
-    {
-        return sanitize_text_field(Options::getOption(self::FIELD_ACCOUNT_ID, self::SECTION));
-    }
-
-    /**
      * Returns the enable for WordPress user (logged-in) field.
-     * @return string
+     * @return bool
      */
-    public static function getEnableForUser(): string
+    public static function isEnableForUser(): bool
     {
-        return sanitize_text_field(Options::getOption(self::FIELD_ENABLE_FOR_USER, self::SECTION));
+        return filter_var(
+            Options::getOption(self::FIELD_ENABLE_FOR_USER, self::SECTION, false),
+            FILTER_VALIDATE_BOOL
+        );
     }
 
     /**
@@ -116,7 +120,7 @@ class Settings extends AbstractHookProvider
             new SettingField([
                 SettingField::NAME => self::FIELD_ENABLED,
                 SettingField::LABEL => esc_html__('Enable', 'wp-unghoster'),
-                SettingField::DESC => esc_html__('Enable of disable.', 'wp-unghoster'),
+                SettingField::DESC => esc_html__('Enable or disable script.', 'wp-unghoster'),
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_CHECKBOX,
                 SettingField::DEFAULT => 'off',
                 SettingField::SECTION_ID => $section_id,
