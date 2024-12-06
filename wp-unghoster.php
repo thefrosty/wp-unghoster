@@ -10,7 +10,7 @@
  * Requires PHP: 8.1
  * Plugin URI: https://github.com/thefrosty/wp-unghoster
  * GitHub Plugin URI: https://github.com/thefrosty/wp-unghoster
- * Primary Branch: develop
+ * Primary Branch: main
  * Release Asset: true
  */
 
