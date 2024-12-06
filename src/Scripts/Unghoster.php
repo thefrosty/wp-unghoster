@@ -40,7 +40,7 @@ class Unghoster extends AbstractContainerProvider
 
         wp_register_script(handle: self::HANDLE_UNGHOSTER, src: '', ver: null, args: ['in_footer' => false]);
         // Don't continue if we have a WordPress user.
-        if (Settings::isEnableForUser() && is_user_logged_in()) {
+        if (!Settings::isEnableForUser() && is_user_logged_in()) {
             return;
         }
         wp_enqueue_script(self::HANDLE_UNGHOSTER);
