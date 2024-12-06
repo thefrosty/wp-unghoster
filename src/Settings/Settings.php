@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace TheFrosty\WpUnghoster\Settings;
 
@@ -119,8 +121,8 @@ class Settings extends AbstractHookProvider
         $field_manager->addField(
             new SettingField([
                 SettingField::NAME => self::FIELD_ENABLED,
-                SettingField::LABEL => esc_html__('Enable', 'wp-unghoster'),
-                SettingField::DESC => esc_html__('Enable or disable script.', 'wp-unghoster'),
+                SettingField::LABEL => esc_html__('Enqueue', 'wp-unghoster'),
+                SettingField::DESC => esc_html__('Enable or disable front-end script enqueue.', 'wp-unghoster'),
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_CHECKBOX,
                 SettingField::DEFAULT => 'off',
                 SettingField::SECTION_ID => $section_id,
@@ -131,7 +133,13 @@ class Settings extends AbstractHookProvider
             new SettingField([
                 SettingField::NAME => self::FIELD_ACCOUNT_ID,
                 SettingField::LABEL => \esc_html__('Unghoster ID', 'wp-unghoster'),
-                SettingField::DESC => \esc_html__('Your domain account ID.', 'wp-unghoster'),
+                SettingField::DESC => \__(
+                    \sprintf(
+                        'Your domain account ID. Found on the <a href="%s">App</a> page in the Code Snippet <code>unghoster.init()</code>.',
+                        'https://www.unghoster.com/signin?ref=thefrosty'
+                    ),
+                    'wp-unghoster'
+                ),
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_TEXT,
                 SettingField::ATTRIBUTES => [
                     'autocomplete' => 'off',
