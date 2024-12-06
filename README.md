@@ -12,7 +12,7 @@ Requires an Unghoster account, [signup for free](https://www.unghoster.com/signu
 ### Package Installation (via Composer)
 
 ```bash
-composer require thefrosty/wp-unghoster:^2.5
+composer require thefrosty/wp-unghoster:^0.1
 ```
 
 ---
