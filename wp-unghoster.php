@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Unghoster
- * Description:
+ * Description: Retrieve person-level contact information including emails and Linkedin for your website visitors. <a href="https://www.unghoster.com/signup?ref=thefrosty" target="_blank">Signup for free</a>.
  * Author: Austin Passy
  * Author URI: https://github.com/thefrosty
  * Version: 0.1.0
@@ -38,6 +38,7 @@ $plugin->add(new Unghoster());
 if (is_admin()) {
     $plugin
         ->add(new DisablePluginUpdateCheck())
+        ->add(new Settings())
         ->add(new WpSettingsApi(Settings::factory($plugin)));
 }
 
