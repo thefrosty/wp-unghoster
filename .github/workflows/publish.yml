@@ -23,6 +23,9 @@ on:
   release:
     types: [ published ]
 
+permissions:
+  contents: write
+
 jobs:
   Build:
     name: Build and Upload Release
@@ -64,9 +67,9 @@ jobs:
           path: build/wp-unghoster.zip
 
       - name: Upload to release
-        uses: JasonEtco/upload-to-release@master
+        uses: softprops/action-gh-release@v2
         with:
-          args: build/wp-unghoster.zip application/zip
+          files: build/wp-unghoster.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
 
@@ -77,8 +80,8 @@ jobs:
           args: zip -X -r build/wp-unghoster-${{ env.RELEASE_VERSION }}.zip . -x *.git* bin** node_modules/\* .* "*/\.*" *.dist *.xml *.neon composer.lock package*.json tests** build**
 
       - name: Upload duplicate to release
-        uses: JasonEtco/upload-to-release@master
+        uses: softprops/action-gh-release@v2
         with:
-          args: build/wp-unghoster-${{ env.RELEASE_VERSION }}.zip application/zip
+          files: build/wp-unghoster-${{ env.RELEASE_VERSION }}.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
