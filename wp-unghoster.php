@@ -3,7 +3,7 @@
  * Plugin Name: Unghoster
  * Description: Retrieve person-level contact information including emails and Linkedin for your website visitors. <a href="https://www.unghoster.com/signup?ref=thefrosty" target="_blank">Signup for free</a>.
  * Author: Austin Passy
- * Author URI: https://github.com/thefrosty
+ * Author URI: https://austin.passy.co/
  * Version: 0.1.0
  * Requires at least: 6.6
  * Tested up to: 6.7.1
