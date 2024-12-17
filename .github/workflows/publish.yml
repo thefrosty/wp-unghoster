@@ -58,18 +58,18 @@ jobs:
       - name: Create artifact
         uses: montudor/action-zip@v1
         with:
-          args: zip -X -r build/wp-unghoster.zip . -x *.git* bin** node_modules/\* .* "*/\.*" *.dist *.xml *.neon composer.lock package*.json tests** build**
+          args: zip -X -r build/${{ github.event.repository.name }}.zip . -x *.git* bin** node_modules/\* .* "*/\.*" *.dist *.xml *.neon composer.lock package*.json tests** build**
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: wp-unghoster
-          path: build/wp-unghoster.zip
+          name: ${{ github.event.repository.name }}
+          path: build/${{ github.event.repository.name }}.zip
 
       - name: Upload to release
         uses: softprops/action-gh-release@v2
         with:
-          files: build/wp-unghoster.zip
+          files: build/${{ github.event.repository.name }}.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
 
@@ -77,11 +77,11 @@ jobs:
         # @see https://github.com/afragen/github-updater/wiki/Settings#release-assets
         uses: montudor/action-zip@v1
         with:
-          args: zip -X -r build/wp-unghoster-${{ env.RELEASE_VERSION }}.zip . -x *.git* bin** node_modules/\* .* "*/\.*" *.dist *.xml *.neon composer.lock package*.json tests** build**
+          args: zip -X -r build/${{ github.event.repository.name }}-${{ env.RELEASE_VERSION }}.zip . -x *.git* bin** node_modules/\* .* "*/\.*" *.dist *.xml *.neon composer.lock package*.json tests** build**
 
       - name: Upload duplicate to release
         uses: softprops/action-gh-release@v2
         with:
-          files: build/wp-unghoster-${{ env.RELEASE_VERSION }}.zip
+          files: build/${{ github.event.repository.name }}-${{ env.RELEASE_VERSION }}.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
