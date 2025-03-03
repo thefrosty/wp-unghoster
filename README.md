@@ -5,6 +5,8 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/thefrosty/wp-unghoster.svg)](https://packagist.org/packages/thefrosty/wp-unghoster)
 [![License](https://img.shields.io/packagist/l/thefrosty/wp-unghoster.svg)](https://packagist.org/thefrosty/wp-unghoster)
 
+[Archived] The Unghoster service is offline.
+
 Retrieve person-level contact information including emails and Linkedin for your website visitors.
 
 Requires an Unghoster account, [signup for free](https://www.unghoster.com/signup?ref=thefrosty).
